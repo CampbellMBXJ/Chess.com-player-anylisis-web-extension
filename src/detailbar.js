@@ -27,9 +27,10 @@ class DetailBar {
   }
 
   insertDetails() {
-    const currentDetails = `Accuracy: ${this.playerDetails.meanAccuracy}% (${this.playerDetails.accuracyCount} game average)`;
+    const currentDetails = `Accuracy: ${this.playerDetails.meanAccuracy.toFixed(2)}% (${this.playerDetails.accuracyCount} game average)`;
     this.detailBarContainer.innerText = currentDetails;
   }
 }
 
-export default DetailBar;
+// Use globalThis as dynamic imports not compatible with firefox
+globalThis.DetailBar = DetailBar;

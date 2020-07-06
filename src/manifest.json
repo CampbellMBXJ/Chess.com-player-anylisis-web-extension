@@ -19,15 +19,13 @@
   "content_scripts": [
     {
       "matches": ["https://www.chess.com/live*"],
-      "js": ["contentscript.js"],
+      "js": [
+        "playerdetails.js",
+        "main.js",
+        "detailbar.js"
+      ],
       "css": ["detailbar.css"]
     }
-  ],
-
-  "web_accessible_resources": [
-    "playerdetails.js",
-    "main.js",
-    "detailbar.js"
   ],
   
   "background": {

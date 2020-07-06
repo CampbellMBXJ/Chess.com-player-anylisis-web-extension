@@ -2,21 +2,30 @@
 
 'use strict';
 
-import PlayerDetails from './playerdetails.js';
-import DetailBar from './detailbar.js';
+/* global chrome:false */
+
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    console.log(request);
+    // listen for messages sent from background.js
+    if (request.type === 'tabupdate') {
+      main();
+    }
+    sendResponse();
+});
+
 
 async function main() {
-  
   const inGame = isInGame();
   console.log(`inGame: ${inGame}`);
 
   if (inGame) {
     const opponentName = getOpponent();
-    const opponent = new PlayerDetails("Umutof");
+    const opponent = new globalThis.PlayerDetails(opponentName);
     await opponent.fetchPlayerAccuracy();
     console.log(opponent.accuracyCount);
     console.log(opponent.meanAccuracy);
-    const opponentBar = new DetailBar(opponent);
+    const opponentBar = new globalThis.DetailBar(opponent);
     
     // sendMessage("accuracy", accuracyResHandler, { opponent });
   }
@@ -45,5 +54,3 @@ function isInGame() {
   
   return url.slice(PATH.length).startsWith("#g=");
 }
-
-main();

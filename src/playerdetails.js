@@ -11,16 +11,7 @@ class PlayerDetails {
   }
 
   async fetchPlayerAccuracy() {
-    const res = await fetch('https://www.chess.com/games/archive/' + this.playerName, {
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json',
-        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
-      }
-    });
+    const res = await fetch('https://www.chess.com/games/archive/' + this.playerName);
     const text = await res.text();
     
     const parser = new DOMParser();
@@ -48,4 +39,5 @@ class PlayerDetails {
   }
 }
 
-export default PlayerDetails;
+// Use global this as dynamic imports not compatible with firefox
+globalThis.PlayerDetails = PlayerDetails;
