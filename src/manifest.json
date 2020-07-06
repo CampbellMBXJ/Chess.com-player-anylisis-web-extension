@@ -1,0 +1,45 @@
+{
+  "manifest_version": 2,
+  "icons": {
+    "48": "icon.png",
+    "128": "icon128.png"
+  },
+  "name": "Chess.com opponent anylisis",
+  "version": "1.0",
+  "applications": {
+    "gecko": {
+      "id": "chess-com-opponent-anylisis@mozilla.org"
+    }
+  },
+
+  "permissions": [
+    "tabs"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": ["https://www.chess.com/live*"],
+      "js": ["contentscript.js"],
+      "css": ["detailbar.css"]
+    }
+  ],
+
+  "web_accessible_resources": [
+    "playerdetails.js",
+    "main.js",
+    "detailbar.js"
+  ],
+  
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+
+  "browser_action": {
+    "default_title": "Chess.com opponent anylisis",
+    "default_icon": {
+      "19": "button.png",
+      "38": "button38.png"
+    }
+  }
+}
